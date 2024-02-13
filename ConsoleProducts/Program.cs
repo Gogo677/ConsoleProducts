@@ -1,8 +1,16 @@
-﻿int opcion;
+﻿using ConsoleProducts.Repositories;
+using ConsoleProducts.Services;
 
-while (true)
+//Inicializando servicio e injectando repositorio
+ProductRepository productRepository = new ProductRepository();
+ProductService productService = new ProductService(productRepository);
+
+// Inicializando opcón de menú
+int opcion=0;
+
+while (opcion != 3)
 {
-    PrintMenu();    
+    printMenu();    
     try
     {
         opcion = int.Parse(Console.ReadLine());
@@ -12,18 +20,26 @@ while (true)
         opcion = 0;   
     }
 
-    if ( opcion == 0 )
+    switch (opcion)
     {
-        Console.WriteLine("Seleccione una opción valida. \n Pulse una enter para continuar...  ");
-        Console.ReadLine();
-    } else
-    {
-
+        case 0:
+            Console.WriteLine("Seleccione una opçion valida");
+            Console.WriteLine("Pulse una tecla para continuar... ");
+            Console.ReadKey();
+            break;
+        case 1:
+            registrarProducto();
+            break;
+        case 2:
+            verProductos();
+            break;
+        case 3:
+            break;
     }
 }
 
 
-void PrintMenu()
+void printMenu()
 {
     Console.Clear();
     Console.WriteLine("Selecciona una opción:");
@@ -31,4 +47,15 @@ void PrintMenu()
     Console.WriteLine("2. Ver productos");
     Console.WriteLine("3. Salir");
     Console.Write("Selecciona una opción: ");
+}
+
+
+void registrarProducto()
+{
+
+}
+
+void verProductos()
+{
+
 }
