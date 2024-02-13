@@ -1,4 +1,5 @@
-﻿using ConsoleProducts.Repositories;
+﻿using ConsoleProducts.Models;
+using ConsoleProducts.Repositories;
 using ConsoleProducts.Services;
 
 //Inicializando servicio e injectando repositorio
@@ -52,10 +53,40 @@ void printMenu()
 
 void registrarProducto()
 {
+    Product newProduct = new Product();
+    Console.WriteLine("----- Registrar un producto -----");
+    Console.WriteLine("Introduzca el id: ");
+    newProduct.Id = int.Parse(Console.ReadLine());
+    Console.WriteLine("Introduzca el Nombre: ");
+    newProduct.Name = Console.ReadLine();
+    Console.WriteLine("Introduzca la descripción: ");
+    newProduct.Description = Console.ReadLine();
+    Console.WriteLine("Introduzca la Categoria: ");
+    newProduct.Category = Console.ReadLine();
+    Console.WriteLine("Introduzca el precio: ");
+    newProduct.Price = Decimal.Parse(Console.ReadLine());
 
+    productService.addProduct(newProduct);
+
+    Console.WriteLine("Producto agregado.");
+    Console.WriteLine("Pulse algo para continuar");
+    Console.ReadKey();
 }
 
 void verProductos()
 {
-
+    List<Product> products;
+    Console.WriteLine("----- Ver productos -----");
+    products = productService.GetProducts();
+    foreach (Product product in products)
+    {
+        Console.WriteLine("---- PRODUCTO ----");
+        Console.WriteLine("Id: " + product.Id);
+        Console.WriteLine("Nombre: " + product.Name);
+        Console.WriteLine("Descripción: " + product.Description);
+        Console.WriteLine("Categoría: " + product.Price);
+        Console.WriteLine("------------------");
+    }
+    Console.WriteLine("Pulse algo para continuar");
+    Console.ReadKey();
 }
